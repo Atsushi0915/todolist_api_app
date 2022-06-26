@@ -8,12 +8,22 @@ class Api::V1::TasksController < ApplicationController
     }, statas: :ok
   end
 
+
+  def create
+    task = Task.create(task_params)
+    if task.save
+      render json:{
+        task: task
+      }, statas: :ok
+    else
+      render json: todo.errors, status: 422
+    end
+
+  end
+
+
   def update
-    p '-----------------'
     task = Task.find(params[:id])
-    p '================'
-    p task_params
-    p '================'
     if task.update(task_params)
       render json: {
         task: task
@@ -23,6 +33,16 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+
+  def destroy
+    if Task.destroy(params[:id])
+      head :no_content
+    else
+      render json: { error: "Failed to destroy" }, status: 422
+    end
+  end
+
+  
 
   private
     def task_params

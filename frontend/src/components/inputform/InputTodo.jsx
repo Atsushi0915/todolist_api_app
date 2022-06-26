@@ -1,50 +1,60 @@
+import axios from 'axios';
 import React, { memo, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { FlashContext } from '../../providers/FlashProvider';
-import { InconpleteTodoContext } from '../../providers/InconpleteTodoProvider';
+import { TaskContext } from '../../providers/TaskProvider';
 
 
 export const InputTodo = memo(() => {
-  
-  const [ todoText, setTodoText ] = useState('');
+  console.log('InputTodoコンポーネント')
+
+  const [todoText, setTodoText] = useState('');
   const { setFlashFlag } = useContext(FlashContext)
-  const { inconpleteTodos, setInconpleteTodos } = useContext(InconpleteTodoContext)
+  const { taskLists, setTaskLists } = useContext(TaskContext)
+  // console.log(taskLists)
 
   const onChangeTodoText = (event) => {
     setTodoText(event.target.value)
   }
 
   const onClickAdd = () => {
-    if (todoText === "") return; 
-    const newTodos = [...inconpleteTodos, todoText]
-    setInconpleteTodos(newTodos)
-    setTodoText('')  
+    if (todoText === "") return;
+    const taskData = {
+      title: todoText,
+      content: '内容を入力してください。',
+      complete_flag: false
+    }
 
-    if(newTodos.length >= 5){
-      setFlashFlag('todoAddAndError')
-    }else{
-      setFlashFlag('todoAdd')
-    };
+    axios.post('http://localhost:3000/api/v1/tasks', taskData)
+      .then(resp => {
+        const newTasks = [...taskLists, resp.data.task]
+        setTaskLists(newTasks)
+        setTodoText('')
+        if (newTasks.length >= 5) {
+          setFlashFlag('todoAddAndError')
+        } else {
+          setFlashFlag('todoAdd')
+        };
+      })
   };
 
-  return(
+  return (
     <>
       <SAddFormDiv className={BAddFormDiv}>
-        <SAddInput disabled={inconpleteTodos.length >= 5} 
-                   type='text'
-                   placeholder='TODOを入力' 
-                   value={inconpleteTodos.length >= 5 ? 
-                          ('※ TODOは5件以上入力できません'):
-                          (todoText)}
-                   onChange={onChangeTodoText} 
-                   inconpleteTodos={inconpleteTodos}
-                   className={BAddInput} />
-               
-        <SAddButton disabled={inconpleteTodos.length >= 5 ||
-                              (!todoText || /^\s*$/.test(todoText))} 
-                    onClick={onClickAdd} 
-                    className={BAddButton} >
-            追加
+        <SAddInput disabled={taskLists.length >= 5}
+          type='text'
+          placeholder='TODOを入力'
+          value={taskLists.length >= 5 ?
+            ('※ TODOは5件以上入力できません') :
+            (todoText)}
+          onChange={onChangeTodoText}
+          taskLists={taskLists}
+          className={BAddInput} />
+        <SAddButton disabled={taskLists.length >= 5 ||
+          (!todoText || /^\s*$/.test(todoText))}
+          onClick={onClickAdd}
+          className={BAddButton} >
+          追加
         </SAddButton>
       </SAddFormDiv>
     </>
@@ -72,6 +82,6 @@ const SAddButton = styled.button`
 const BAddInput = "form-control w-75 "
 const SAddInput = styled.input`
   border-radius: 15px;
-  ${props => props.inconpleteTodos.length >= 5 && `color:#ff0000`};
+  ${props => props.taskLists.length >= 5 && `color:#ff0000`};
   
 `

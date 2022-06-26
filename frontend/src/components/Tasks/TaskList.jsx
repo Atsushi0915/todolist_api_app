@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import styled from "styled-components";
 import axios from 'axios'
 import { useEffect } from 'react';
@@ -6,7 +6,10 @@ import { TaskContext } from '../../providers/TaskProvider';
 import { TodoCard } from "../TaskCard/TaskCard";
 import { FlashContext } from '../../providers/FlashProvider';
 
-export const TaskList = () => {
+
+export const TaskList = memo(() => {
+
+  console.log('TaskListコンポーネント')
   const { taskLists, setTaskLists } = useContext(TaskContext);
   const { setFlashFlag } = useContext(FlashContext)
 
@@ -14,13 +17,31 @@ export const TaskList = () => {
     axios.get('http://localhost:3000/api/v1/tasks')
       .then(resp => {
         setTaskLists(resp.data.tasks.filter((value) => value.complete_flag === false))
-
       })
       .catch(e => {
         console.log(e)
       })
   }, [])
-  console.log(taskLists)
+
+
+  const onClickCancel = (index, task) => {
+    const sure = window.confirm('タスクを取り消しますか？');
+    if (sure) {
+      console.log(task)
+      axios.delete(`http://localhost:3000/api/v1/tasks/${task.id}`)
+        .then(resp => {
+          console.log(resp.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+      const newTasks = [...taskLists]
+      newTasks.splice(index, 1)
+      setTaskLists(newTasks)
+      setFlashFlag('todoCancel')
+    }
+  }
+
 
   const onClickConplete = (index, task) => {
     const taskData = {
@@ -29,15 +50,11 @@ export const TaskList = () => {
       content: task.content,
       complete_flag: !task.complete_flag
     }
-
-
     axios.patch(`http://localhost:3000/api/v1/tasks/${task.id}`, taskData)
       .then(resp => {
-        console.log(resp)
         const newTasks = [...taskLists]
-
-        console.log(resp.data.complete_flag)
         newTasks[index].complete_flag = resp.data.task.complete_flag
+        newTasks.splice(index, 1)
         setTaskLists(newTasks);
       })
     setFlashFlag('taskConplete')
@@ -62,6 +79,9 @@ export const TaskList = () => {
                     <SConpleteButton onClick={() => onClickConplete(index, task)} className={BConpleteButton}>
                       完了
                     </SConpleteButton>
+                    <SCancelButton onClick={() => onClickCancel(index, task)} className={BCancelButton}>
+                      取消
+                    </SCancelButton>
                   </SListDiv>
                 )}
             </div>
@@ -71,7 +91,7 @@ export const TaskList = () => {
       </TodoCard>
     </>
   )
-}
+});
 
 
 const BListDiv = 'd-flex flex-row flex-wrap border-top pt-3 align-items-center my-2'
@@ -84,4 +104,12 @@ const SConpleteButton = styled.button`
   background-color: #c6eeff;
   font-weight: bold;
   font-size: 11px;
+`
+
+const BCancelButton = 'btn-sm btn-outline-warning '
+const SCancelButton = styled.button`
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 11px;
+  color: #7c7a00;
 `
