@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const FlashMessage = memo(() => {
   const { flashFlag } = useContext(FlashContext);
-  
+
   const flashStatas = {
     position: "top-center",
     autoClose: 5000,
@@ -18,8 +18,8 @@ export const FlashMessage = memo(() => {
     progress: undefined,
     theme: ""
   }
-  
-  switch(flashFlag){
+
+  switch (flashFlag) {
     case "todoError":
       toast.error("登録できるタスクは５件までやで！！", flashStatas);
       break;
@@ -72,7 +72,7 @@ export const FlashMessage = memo(() => {
       break;
     default:
   }
-  
+
 
   return (
     <>

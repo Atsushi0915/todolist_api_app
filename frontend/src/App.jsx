@@ -15,7 +15,9 @@ export const App = () => {
       <FlashProvider>
         <TaskProvider>
           <FlashMessage />
-          <TodoRouter />
+          <React.StrictMode>
+            <TodoRouter />
+          </React.StrictMode>
         </TaskProvider>
       </FlashProvider>
     </>

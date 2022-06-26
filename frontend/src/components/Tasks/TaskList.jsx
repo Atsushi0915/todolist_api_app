@@ -39,6 +39,7 @@ export const TaskList = memo(() => {
       newTasks.splice(index, 1)
       setTaskLists(newTasks)
       setFlashFlag('todoCancel')
+      console.log('削除フラグ')
     }
   }
 
@@ -59,6 +60,12 @@ export const TaskList = memo(() => {
       })
     setFlashFlag('taskConplete')
   }
+
+  useEffect(() => {
+    setFlashFlag('')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [taskLists])
+
 
 
   return (
