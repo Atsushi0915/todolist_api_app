@@ -4,6 +4,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.string :content, null: false
       t.boolean :complete_flag, default: false, null: false
+      t.boolean :del_flag, default: false, null: false
 
       t.timestamps
     end
