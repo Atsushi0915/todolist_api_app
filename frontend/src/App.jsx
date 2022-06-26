@@ -1,13 +1,23 @@
 import React from "react";
-import { TodoList } from "./TodoList";
+
+import { FlashProvider } from "./providers/FlashProvider";
+import { TaskProvider } from "./providers/TaskProvider";
+
+import { FlashMessage } from "./components/flashMessage/FlashMessage";
+import { TodoRouter } from "./router/TodoRouter";
 
 
-function App() {
+
+
+export const App = () => {
   return (
     <>
-      <TodoList />
+      <FlashProvider>
+        <TaskProvider>
+          <FlashMessage />
+          <TodoRouter />
+        </TaskProvider>
+      </FlashProvider>
     </>
   );
 }
-
-export default App;
