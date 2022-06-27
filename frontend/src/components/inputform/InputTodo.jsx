@@ -3,6 +3,7 @@ import React, { memo, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { FlashContext } from '../../providers/FlashProvider';
 import { TaskContext } from '../../providers/TaskProvider';
+import { taskCreateUrl } from '../../urls/urls';
 
 
 export const InputTodo = memo(() => {
@@ -22,7 +23,7 @@ export const InputTodo = memo(() => {
       Complete_flag: false
     }
 
-    axios.post('http://localhost:3000/api/v1/tasks', taskData)
+    axios.post(taskCreateUrl, taskData)
       .then(resp => {
         const newTasks = [...taskLists, resp.data.task]
         setTaskLists(newTasks)

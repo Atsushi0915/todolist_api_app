@@ -5,6 +5,7 @@ import { TaskContext } from '../../providers/TaskProvider';
 import { TaskCard } from "../TaskCard/TaskCard";
 import { FlashContext } from '../../providers/FlashProvider';
 import { CompleteTaskContext } from '../../providers/CompleteTaskProvider';
+import { taskDeleteUrl, taskUpdataUrl } from '../../urls/urls';
 
 
 export const TaskList = memo(() => {
@@ -20,7 +21,7 @@ export const TaskList = memo(() => {
       content: task.content,
       complete_flag: !task.complete_flag
     }
-    axios.patch(`http://localhost:3000/api/v1/tasks/${task.id}`, taskData)
+    axios.patch(taskUpdataUrl(task.id), taskData)
       .then(resp => {
         const newTasks = [...taskLists]
         newTasks[index].complete_flag = resp.data.task.complete_flag
@@ -38,7 +39,7 @@ export const TaskList = memo(() => {
   const onClickCancel = (index, task) => {
     const sure = window.confirm('タスクを取り消しますか？');
     if (sure) {
-      axios.delete(`http://localhost:3000/api/v1/tasks/${task.id}`)
+      axios.delete(taskDeleteUrl(task.id))
         .then(resp => {
           console.log(resp.data)
           const newTasks = [...taskLists]

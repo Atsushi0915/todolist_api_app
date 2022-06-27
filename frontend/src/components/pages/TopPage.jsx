@@ -14,7 +14,7 @@ export const TopPage = () => {
   }
 
   const onClickGitHub = () => {
-    window.open('https://github.com/Atsushi0915/todolist_app', '_blank')
+    window.open('https://github.com/Atsushi0915/todolist_api_app', '_blank')
   }
 
   return (

@@ -6,6 +6,7 @@ import { FlashContext } from "../../providers/FlashProvider";
 import { CompleteTaskContext } from "../../providers/CompleteTaskProvider";
 import axios from "axios";
 import { TaskContext } from "../../providers/TaskProvider";
+import { taskUpdataUrl } from "../../urls/urls";
 
 
 export const CompleteTasks = memo(() => {
@@ -20,7 +21,7 @@ export const CompleteTasks = memo(() => {
       content: task.content,
       complete_flag: !task.complete_flag
     }
-    axios.patch(`http://localhost:3000/api/v1/tasks/${task.id}`, taskData)
+    axios.patch(taskUpdataUrl(task.id), taskData)
       .then(resp => {
         const newTasks = [...completeTasks]
         newTasks[index].complete_flag = resp.data.task.complete_flag
@@ -45,7 +46,7 @@ export const CompleteTasks = memo(() => {
       const taskData = {
         del_flag: !task.del_flag
       }
-      axios.patch(`http://localhost:3000/api/v1/tasks/${task.id}`, taskData)
+      axios.patch(taskUpdataUrl(task.id), taskData)
         .then(resp => {
           const newTasks = [...completeTasks]
           newTasks[index].del_flag = resp.data.task.del_flag
@@ -66,7 +67,7 @@ export const CompleteTasks = memo(() => {
         cardHeaderIcon={'FiCheckSquare'}
         cardBodyColor={"#e9fcfe"}
         cardTitle={'Conpleteリスト'}
-        cardMessage={`完了したタスクは件です`}>
+        cardMessage={`完了したタスクは${completeTasks.length}件です`}>
 
         {completeTasks === 0 || completeTasks.map((task, index) => {
           return (
