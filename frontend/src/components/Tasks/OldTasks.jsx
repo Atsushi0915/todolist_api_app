@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { memo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,7 +10,7 @@ import { TaskCard } from "../TaskCard/TaskCard";
 
 
 export const OldTasks = memo(() => {
-  const { oldTasks } = useContext(OldTaskContext)
+  const { oldTasks, setOldTasks } = useContext(OldTaskContext)
   const { searchName } = useContext(SearchNameContext)
   const { setFlashFlag } = useContext(FlashContext)
   const navigate = useNavigate()
@@ -24,11 +25,18 @@ export const OldTasks = memo(() => {
     }
   })
 
+
   const onClickOldDelete = () => {
     const sure = window.confirm('過去のタスクを削除しますか？');
     if (sure) {
+      axios.delete('http://localhost:3000/api/v1/tasks/destroy_all')
+        .then(setOldTasks([])
+        )
+        .catch(e => {
+          console.log(e)
+        })
       setFlashFlag('allDelete')
-      navigate('/todos')
+      navigate('/tasks')
     }
   }
 

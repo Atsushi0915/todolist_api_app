@@ -42,6 +42,14 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+  def destroy_all
+    if Task.destroy_all
+      head :no_content
+    else
+      render json: {error: "Failed to destroy"}, status: 422
+    end
+  end
+
   
 
   private

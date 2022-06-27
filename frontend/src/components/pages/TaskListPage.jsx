@@ -26,7 +26,7 @@ export const TaskListPage = memo(() => {
       .catch(e => {
         console.log(e)
       })
-  }, [])
+  }, [setTaskLists, setCompleteTasks])
 
   useEffect(() => {
     setFlashFlag('')

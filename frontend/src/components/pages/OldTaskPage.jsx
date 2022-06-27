@@ -21,7 +21,7 @@ export const OldTaskPage = () => {
       .catch(e => {
         console.log(e)
       })
-  }, [])
+  }, [setOldTasks])
 
   return (
     <>
