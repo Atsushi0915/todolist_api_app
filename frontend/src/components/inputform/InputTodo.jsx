@@ -6,12 +6,9 @@ import { TaskContext } from '../../providers/TaskProvider';
 
 
 export const InputTodo = memo(() => {
-  console.log('InputTodoコンポーネント')
-
   const [todoText, setTodoText] = useState('');
   const { setFlashFlag } = useContext(FlashContext)
   const { taskLists, setTaskLists } = useContext(TaskContext)
-  // console.log(taskLists)
 
   const onChangeTodoText = (event) => {
     setTodoText(event.target.value)
@@ -22,7 +19,7 @@ export const InputTodo = memo(() => {
     const taskData = {
       title: todoText,
       content: '内容を入力してください。',
-      complete_flag: false
+      Complete_flag: false
     }
 
     axios.post('http://localhost:3000/api/v1/tasks', taskData)

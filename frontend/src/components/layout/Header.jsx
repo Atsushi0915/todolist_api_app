@@ -16,6 +16,9 @@ export const Header = () => {
           <SSubLink to='/todos' className={BSubLink}>
             TODOs
           </SSubLink>
+          <SSubLink to='/oldtodos' className={BSubLink}>
+            OLD TODOs
+          </SSubLink>
         </NavLayout>
       </SHeaderNav>
     </>

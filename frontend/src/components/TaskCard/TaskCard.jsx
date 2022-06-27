@@ -3,25 +3,25 @@ import styled from "styled-components";
 import { CardHeaderIcon } from "./CardHeaderIcon";
 
 
-export const TodoCard = (props) => {
-  const { children, 
-          cardHeaderColor,
-          cardHeaderIcon,  
-          cardBodyColor, 
-          cardTitle, 
-          cardMessage } = props;
+export const TaskCard = (props) => {
+  const { children,
+    cardHeaderColor,
+    cardHeaderIcon,
+    cardBodyColor,
+    cardTitle,
+    cardMessage } = props;
 
 
   return (
     <>
       <SCardDiv className={BCardDiv} >
-        <SCardHeaderDiv cardHeaderColor={cardHeaderColor} 
-                        className={BCardHeaderDiv} >
+        <SCardHeaderDiv cardHeaderColor={cardHeaderColor}
+          className={BCardHeaderDiv} >
           <CardHeaderIcon cardHeaderIcon={cardHeaderIcon} />
           {cardTitle}
         </SCardHeaderDiv>
-        <SCardBodyDiv cardBodyColor={cardBodyColor} 
-                      className={BCardBodyDiv} >
+        <SCardBodyDiv cardBodyColor={cardBodyColor}
+          className={BCardBodyDiv} >
           <SCardMessageDiv className={BCradMessageDiv}>
             {cardMessage}
           </SCardMessageDiv>

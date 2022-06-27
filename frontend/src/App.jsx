@@ -5,19 +5,19 @@ import { TaskProvider } from "./providers/TaskProvider";
 
 import { FlashMessage } from "./components/flashMessage/FlashMessage";
 import { TodoRouter } from "./router/TodoRouter";
-
-
-
+import { CompleteTaskProvider } from "./providers/CompleteTaskProvider";
 
 export const App = () => {
   return (
     <>
       <FlashProvider>
         <TaskProvider>
-          <FlashMessage />
-          <React.StrictMode>
-            <TodoRouter />
-          </React.StrictMode>
+          <CompleteTaskProvider>
+            <FlashMessage />
+            <React.StrictMode>
+              <TodoRouter />
+            </React.StrictMode>
+          </CompleteTaskProvider>
         </TaskProvider>
       </FlashProvider>
     </>

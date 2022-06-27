@@ -50,7 +50,7 @@ export const FlashMessage = memo(() => {
       toast.error("もうええやろ。消しとくよっ！", flashStatas);
       break;
 
-    case "todoConplete":
+    case "taskConplete":
       flashStatas.position = "top-right"
       toast.info("やったでー！終わったで！！", flashStatas);
       break;

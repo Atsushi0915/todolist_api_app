@@ -7,7 +7,6 @@ import { TopPage } from "../components/pages/TopPage";
 
 
 export const TodoRouter = () => {
-  console.log('TodoRousterコンポーネント')
   return (
     <BrowserRouter>
       <Routes>
