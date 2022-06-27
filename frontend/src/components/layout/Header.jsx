@@ -13,10 +13,10 @@ export const Header = () => {
           TODO_APP
         </STodoAppLink>
         <NavLayout>
-          <SSubLink to='/todos' className={BSubLink}>
+          <SSubLink to='/tasks' className={BSubLink}>
             TODOs
           </SSubLink>
-          <SSubLink to='/oldtodos' className={BSubLink}>
+          <SSubLink to='/oldtasks' className={BSubLink}>
             OLD TODOs
           </SSubLink>
         </NavLayout>

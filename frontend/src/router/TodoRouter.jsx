@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import { DefaultLayout } from "../components/layout/DefaultLayout";
-// import { OldTodoPage } from "../components/pages/OldTodoPage";
+import { OldTaskPage } from "../components/pages/OldTaskPage";
 import { TaskListPage } from "../components/pages/TaskListPage";
 import { TopPage } from "../components/pages/TopPage";
 
@@ -11,9 +10,13 @@ export const TodoRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route exact path='/' element={<TopPage />} />
-        <Route exact path='/todos' element={
+        <Route exact path='/tasks' element={
           <DefaultLayout >
             <TaskListPage />
+          </DefaultLayout>} />
+        <Route exact path='/oldtasks' element={
+          <DefaultLayout>
+            <OldTaskPage />
           </DefaultLayout>} />
       </Routes>
     </BrowserRouter>

@@ -10,11 +10,11 @@ export const TopPage = () => {
   const navigate = useNavigate();
 
   const onClickTop = () => {
-    navigate('/todos')
+    navigate('/tasks')
   }
 
   const onClickGitHub = () => {
-    window.open('https://github.com/Atsushi0915/todolist_app','_blank')
+    window.open('https://github.com/Atsushi0915/todolist_app', '_blank')
   }
 
   return (
@@ -25,14 +25,14 @@ export const TopPage = () => {
           <StopMainP>
             あなたがやるべき事はなんですか？
           </StopMainP>
-          <STopButton  onClick={onClickTop}
-                       className={BTopButton}>
+          <STopButton onClick={onClickTop}
+            className={BTopButton}>
             リスト作成
           </STopButton>
           <SGitHubDiv className={BGitHubDiv} >
             <IconContext.Provider value={{ color: '#000000', size: '70px' }}>
               <Button onClick={onClickGitHub}>
-                <AiFillGithub/>
+                <AiFillGithub />
               </Button>
             </IconContext.Provider>
           </SGitHubDiv>
