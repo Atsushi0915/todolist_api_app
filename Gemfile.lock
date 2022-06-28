@@ -107,6 +107,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-darwin)
       racc (~> 1.4)
+    pg (1.4.1)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -222,6 +223,7 @@ DEPENDENCIES
   foreman
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  pg
   pry-rails
   puma (~> 5.0)
   rack-cors
@@ -230,7 +232,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
-  sqlite3 (~> 1.4)
+  sqlite3
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
