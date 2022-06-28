@@ -1,0 +1,15 @@
+current directory: /Users/atsushiwada/React-Rails/todolist_api_app/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.12.0/ext/bootsnap
+/Users/atsushiwada/.rbenv/versions/2.7.5/bin/ruby -I /Users/atsushiwada/.rbenv/versions/2.7.5/lib/ruby/2.7.0 -r ./siteconf20220628-36447-1a4i0g4.rb extconf.rb
+creating Makefile
+
+current directory: /Users/atsushiwada/React-Rails/todolist_api_app/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.12.0/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/atsushiwada/React-Rails/todolist_api_app/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.12.0/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/atsushiwada/React-Rails/todolist_api_app/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.12.0/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20220628-36447-r11qvn/bootsnap
