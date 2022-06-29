@@ -15,6 +15,3 @@ export const taskEditUrl = (taskId) =>
   `${DEFAULT_API_URL}/tasks/${taskId}`
 
 export const taskDestroyAllUrl = `${DEFAULT_API_URL}/tasks/destroy_all`
-
-
-
