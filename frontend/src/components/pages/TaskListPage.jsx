@@ -4,7 +4,7 @@ import { CompleteTaskContext } from '../../providers/CompleteTaskProvider';
 import { FlashContext } from '../../providers/FlashProvider';
 import { TaskContext } from '../../providers/TaskProvider';
 import { taskIndexUrl } from '../../urls/urls';
-import { InputTodo } from '../inputform/InputTodo';
+import { InputTask } from '../inputform/InputTask';
 import { CompleteTasks } from '../Tasks/CompleteTasks';
 import { TaskList } from '../Tasks/TaskList';
 
@@ -36,7 +36,7 @@ export const TaskListPage = memo(() => {
 
   return (
     <>
-      <InputTodo />
+      <InputTask />
       <TaskList />
       <CompleteTasks />
     </>

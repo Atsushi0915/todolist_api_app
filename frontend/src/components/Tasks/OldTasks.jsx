@@ -31,12 +31,14 @@ export const OldTasks = memo(() => {
     const sure = window.confirm('過去のタスクを削除しますか？');
     if (sure) {
       axios.delete(taskDestroyAllUrl)
-        .then(setOldTasks([])
+        .then(
+          setOldTasks([]),
+          setFlashFlag('allDelete')
         )
         .catch(e => {
           console.log(e)
         })
-      setFlashFlag('allDelete')
+
       navigate('/tasks')
     }
   }

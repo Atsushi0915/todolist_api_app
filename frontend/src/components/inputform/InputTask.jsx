@@ -6,28 +6,28 @@ import { TaskContext } from '../../providers/TaskProvider';
 import { taskCreateUrl } from '../../urls/urls';
 
 
-export const InputTodo = memo(() => {
-  const [todoText, setTodoText] = useState('');
+export const InputTask = memo(() => {
+  const [taskText, setTaskText] = useState('');
   const { setFlashFlag } = useContext(FlashContext)
   const { taskLists, setTaskLists } = useContext(TaskContext)
 
-  const onChangeTodoText = (event) => {
-    setTodoText(event.target.value)
+  const onChangeTaskText = (event) => {
+    setTaskText(event.target.value)
   }
 
   const onClickAdd = () => {
-    if (todoText === "") return;
+    if (taskText === "") return;
     const taskData = {
-      title: todoText,
+      title: taskText,
       content: '内容を入力してください。',
-      Complete_flag: false
+      complete_flag: false
     }
 
     axios.post(taskCreateUrl, taskData)
       .then(resp => {
         const newTasks = [...taskLists, resp.data.task]
         setTaskLists(newTasks)
-        setTodoText('')
+        setTaskText('')
         if (newTasks.length >= 5) {
           setFlashFlag('todoAddAndError')
         } else {
@@ -44,12 +44,12 @@ export const InputTodo = memo(() => {
           placeholder='TODOを入力'
           value={taskLists.length >= 5 ?
             ('※ TODOは5件以上入力できません') :
-            (todoText)}
-          onChange={onChangeTodoText}
+            (taskText)}
+          onChange={onChangeTaskText}
           taskLists={taskLists}
           className={BAddInput} />
         <SAddButton disabled={taskLists.length >= 5 ||
-          (!todoText || /^\s*$/.test(todoText))}
+          (!taskText || /^\s*$/.test(taskText))}
           onClick={onClickAdd}
           className={BAddButton} >
           追加

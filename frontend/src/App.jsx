@@ -8,6 +8,7 @@ import { TodoRouter } from "./router/TodoRouter";
 import { CompleteTaskProvider } from "./providers/CompleteTaskProvider";
 import { OldTaskProvider } from "./providers/OldTaskProvider";
 import { SearchNameProvider } from "./providers/SearchNameProvider";
+import { TaskDataProvider } from "./providers/TaskDataProvide";
 
 export const App = () => {
   return (
@@ -16,12 +17,14 @@ export const App = () => {
         <TaskProvider>
           <CompleteTaskProvider>
             <OldTaskProvider>
-              <SearchNameProvider>
-                <FlashMessage />
-                <React.StrictMode>
-                  <TodoRouter />
-                </React.StrictMode>
-              </SearchNameProvider>
+              <TaskDataProvider>
+                <SearchNameProvider>
+                  <FlashMessage />
+                  <React.StrictMode>
+                    <TodoRouter />
+                  </React.StrictMode>
+                </SearchNameProvider>
+              </TaskDataProvider>
             </OldTaskProvider>
           </CompleteTaskProvider>
         </TaskProvider>

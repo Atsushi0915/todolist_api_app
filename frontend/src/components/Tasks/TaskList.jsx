@@ -6,6 +6,7 @@ import { TaskCard } from "../TaskCard/TaskCard";
 import { FlashContext } from '../../providers/FlashProvider';
 import { CompleteTaskContext } from '../../providers/CompleteTaskProvider';
 import { taskDeleteUrl, taskUpdataUrl } from '../../urls/urls';
+import { Link } from 'react-router-dom';
 
 
 export const TaskList = memo(() => {
@@ -66,7 +67,11 @@ export const TaskList = memo(() => {
         {taskLists === 0 || taskLists.map((task, index) => {
           return (
             <SListDiv key={index} className={BListDiv}>
-              <li >{index + 1} : {task.title}</li>
+              <li >
+                <Link to={`/edittask/${task.id}`} >
+                  {index + 1} : {task.title}
+                </Link>
+              </li>
               <SConpleteButton onClick={() => onClickConplete(index, task)} className={BConpleteButton}>
                 完了
               </SConpleteButton>
