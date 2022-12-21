@@ -15,7 +15,6 @@ export const EditTaskPage = memo(() => {
   const { setFlashFlag } = useContext(FlashContext)
   const { taskData, setTaskData } = useContext(TaskDataContext)
 
-
   const onClickEdit = () => {
     axios.patch(taskUpdataUrl(taskData.id), taskData)
       .then(

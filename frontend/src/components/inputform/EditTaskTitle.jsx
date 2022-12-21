@@ -9,7 +9,7 @@ export const EditTaskTitle = memo((props) => {
 
   const onChangeEditTitle = (event) => {
     setTaskTitle(event.target.value)
-    taskData.title = taskTitle
+    taskData.title = (event.target.value)
   }
 
   useEffect(() => {

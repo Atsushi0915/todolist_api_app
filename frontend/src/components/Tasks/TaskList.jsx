@@ -1,18 +1,23 @@
-import React, { memo, useContext } from 'react'
-import styled from "styled-components";
+import React, { memo, useContext, useState } from 'react'
 import axios from 'axios'
-import { TaskContext } from '../../providers/TaskProvider';
-import { TaskCard } from "../TaskCard/TaskCard";
+import styled from "styled-components";
+import { taskDeleteUrl, taskUpdataUrl } from '../../urls/urls';
+
+import { TaskCard } from "./TaskCard/TaskCard";
+import { ShowTask } from './ShowTask ';
+import { ShowIconButton } from '../iconButton/ShowIconButton';
+
 import { FlashContext } from '../../providers/FlashProvider';
 import { CompleteTaskContext } from '../../providers/CompleteTaskProvider';
-import { taskDeleteUrl, taskUpdataUrl } from '../../urls/urls';
-import { Link } from 'react-router-dom';
+import { TaskContext } from '../../providers/TaskProvider';
 
 
 export const TaskList = memo(() => {
   const { taskLists, setTaskLists } = useContext(TaskContext);
   const { completeTasks, setCompleteTasks } = useContext(CompleteTaskContext)
   const { setFlashFlag } = useContext(FlashContext)
+  const [taskId, setTaskId] = useState('')
+
 
 
   const onClickConplete = (index, task) => {
@@ -36,7 +41,6 @@ export const TaskList = memo(() => {
       })
   }
 
-
   const onClickCancel = (index, task) => {
     const sure = window.confirm('タスクを取り消しますか？');
     if (sure) {
@@ -51,9 +55,13 @@ export const TaskList = memo(() => {
         .catch(e => {
           console.log(e)
         })
-
     }
   }
+
+  const onClickTaskIdSet = () => {
+    alert('TaskId')
+  }
+
 
 
   return (
@@ -67,17 +75,25 @@ export const TaskList = memo(() => {
         {taskLists === 0 || taskLists.map((task, index) => {
           return (
             <SListDiv key={index} className={BListDiv}>
-              <li >
-                <Link to={`/edittask/${task.id}`} >
-                  {index + 1} : {task.title}
-                </Link>
+              <li className="me-2">
+                {index + 1} : {task.title}
               </li>
-              <SConpleteButton onClick={() => onClickConplete(index, task)} className={BConpleteButton}>
-                完了
-              </SConpleteButton>
-              <SCancelButton onClick={() => onClickCancel(index, task)} className={BCancelButton}>
-                取消
-              </SCancelButton>
+
+              <ShowIconButton task={task} />
+              <ShowTask task={task} />
+
+              <div>
+                <SConpleteButton onClick={() => onClickConplete(index, task)}
+                  className={BConpleteButton}>
+                  完了
+                </SConpleteButton>
+
+                <SCancelButton
+                  onClick={() => onClickCancel(index, task)}
+                  className={BCancelButton}>
+                  取消
+                </SCancelButton>
+              </div>
             </SListDiv>
           )
         })}
@@ -87,22 +103,25 @@ export const TaskList = memo(() => {
 });
 
 
+// ######## styled ################################################
+
 const BListDiv = 'd-flex flex-row flex-wrap border-top pt-3 align-items-center my-2'
 const SListDiv = styled.div`
 `
 
-const BConpleteButton = 'btn-sm btn-outline-info text-primary mx-3'
+const BConpleteButton = 'btn-sm btn-outline-info text-primary me-2'
 const SConpleteButton = styled.button`
   border-radius: 10px;
   background-color: #c6eeff;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
 `
 
 const BCancelButton = 'btn-sm btn-outline-warning '
 const SCancelButton = styled.button`
   border-radius: 10px;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
   color: #7c7a00;
+  text-align: right;
 `

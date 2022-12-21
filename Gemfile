@@ -65,3 +65,8 @@ gem 'pry-rails'
 gem 'rack-cors'
 
 gem 'foreman'
+
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end

@@ -1,12 +1,15 @@
 import React, { memo, useContext } from "react";
-import styled from "styled-components"
-
-import { TaskCard } from "../TaskCard/TaskCard";
-import { FlashContext } from "../../providers/FlashProvider";
-import { CompleteTaskContext } from "../../providers/CompleteTaskProvider";
 import axios from "axios";
-import { TaskContext } from "../../providers/TaskProvider";
+import styled from "styled-components"
 import { taskUpdataUrl } from "../../urls/urls";
+
+import { TaskCard } from "./TaskCard/TaskCard";
+import { FlashContext } from "../../providers/FlashProvider";
+
+import { CompleteTaskContext } from "../../providers/CompleteTaskProvider";
+import { TaskContext } from "../../providers/TaskProvider";
+import { ShowIconButton } from "../iconButton/ShowIconButton";
+import { ShowTask } from "./ShowTask ";
 
 
 export const CompleteTasks = memo(() => {
@@ -73,12 +76,18 @@ export const CompleteTasks = memo(() => {
           return (
             <SListDiv key={index} className={BListDiv}>
               <li >{index + 1} : {task.title}</li>
-              <SBackButton onClick={() => { onClickBack(index, task) }} className={BBackButton}>
-                戻す
-              </SBackButton>
-              <SDeleteButton onClick={() => { onClickDelete(index, task) }} className={BDeleteButton}>
-                削除
-              </SDeleteButton>
+
+              <ShowIconButton task={task} />
+              <ShowTask task={task} />
+
+              <div>
+                <SBackButton onClick={() => { onClickBack(index, task) }} className={BBackButton}>
+                  戻す
+                </SBackButton>
+                <SDeleteButton onClick={() => { onClickDelete(index, task) }} className={BDeleteButton}>
+                  削除
+                </SDeleteButton>
+              </div>
             </SListDiv>
           )
         })}
@@ -94,19 +103,19 @@ const SListDiv = styled.div`
   
 `
 
-const BBackButton = 'btn-sm btn-outline-success mx-2'
+const BBackButton = 'btn-sm btn-outline-success me-2'
 const SBackButton = styled.button`
   border-radius: 10px;
   background-color: #e0ffe2;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
 `
 
-const BDeleteButton = 'btn-sm btn-outline-danger mx-2'
+const BDeleteButton = 'btn-sm btn-outline-danger'
 const SDeleteButton = styled.button`
   border-radius: 10px;
   background-color: #ffe1e1;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
 `
 

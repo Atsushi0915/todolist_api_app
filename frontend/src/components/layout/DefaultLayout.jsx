@@ -1,4 +1,4 @@
-import { Header } from "./Header";
+import { Header } from "./Header/Header";
 import styled from "styled-components";
 
 export const DefaultLayout = (props) => {
@@ -8,7 +8,7 @@ export const DefaultLayout = (props) => {
     <>
       <Header />
       <SContainerDiv className={BContainerDiv}>
-        { children }
+        {children}
       </SContainerDiv>
     </>
   )

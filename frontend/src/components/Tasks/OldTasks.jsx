@@ -1,13 +1,17 @@
-import axios from "axios";
 import React, { memo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
+import { taskDestroyAllUrl } from "../../urls/urls";
+
+import { SearchTasks } from "../inputform/SearchTasks";
+import { TaskCard } from "./TaskCard/TaskCard";
+import { ShowIconButton } from '../iconButton/ShowIconButton';
+
 import { FlashContext } from "../../providers/FlashProvider";
 import { OldTaskContext } from "../../providers/OldTaskProvider";
 import { SearchNameContext } from "../../providers/SearchNameProvider";
-import { taskDestroyAllUrl } from "../../urls/urls";
-import { SearchTasks } from "../inputform/SearchTasks";
-import { TaskCard } from "../TaskCard/TaskCard";
+import { ShowTask } from "./ShowTask ";
 
 
 export const OldTasks = memo(() => {
@@ -61,14 +65,19 @@ export const OldTasks = memo(() => {
         {searchTasks.length === 0 ? (
           <SSearchMessage>※ 該当するタスクはありません。</SSearchMessage>
         ) : (
-          searchTasks.map((todo, index) => {
+          searchTasks.map((task, index) => {
             return (
-              <SListDiv key={index} className={BListDiv}>
-                <li>{index + 1} : {todo.title}</li>
-              </SListDiv>
+              <div key={index}>
+                <SListDiv className={BListDiv}>
+                  <li>{index + 1} : {task.title}</li>
+                  <ShowIconButton task={task} />
+                  <ShowTask task={task} />
+                </SListDiv>
+              </div>
             )
           })
         )}
+
 
       </TaskCard>
     </>
@@ -96,6 +105,6 @@ const SSearchMessage = styled.p`
   color: #a70000;
 `
 
-const BListDiv = 'border-top pt-3 align-items-center my-2'
+const BListDiv = 'd-flex border-top pt-3 align-items-center my-2'
 const SListDiv = styled.div`
 `
