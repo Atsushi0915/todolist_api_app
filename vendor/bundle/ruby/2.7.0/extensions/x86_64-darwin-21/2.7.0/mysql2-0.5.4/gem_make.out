@@ -1,5 +1,5 @@
 current directory: /Users/atsushiwada/React-Rails/todolist_api_app/vendor/bundle/ruby/2.7.0/gems/mysql2-0.5.4/ext/mysql2
-/Users/atsushiwada/.rbenv/versions/2.7.5/bin/ruby -I /Users/atsushiwada/.rbenv/versions/2.7.5/lib/ruby/2.7.0 -r ./siteconf20221222-9302-175vmvy.rb extconf.rb
+/Users/atsushiwada/.rbenv/versions/2.7.5/bin/ruby -I /Users/atsushiwada/.rbenv/versions/2.7.5/lib/ruby/2.7.0 -r ./siteconf20221225-9120-1d0291s.rb extconf.rb
 /usr/local/bin/brew
 checking for rb_absint_size()... yes
 checking for rb_absint_singlebit_p()... yes
